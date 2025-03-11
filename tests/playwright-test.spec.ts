@@ -65,10 +65,10 @@ test.describe("Looking for Title", () => {
    const searchResults = page.locator('.mw-search-results');
    await expect(searchResults).toBeTruthy();
 
-    // Warte, bis die Suchergebnisse geladen sind
+    // Wait results to be loaded
     await page.waitForSelector('#firstHeading');
 
-    // Überprüfe, ob die Suchergebnisse geladen wurden
+    // Check if the search results are loaded
     const heading = await page.textContent('#firstHeading');
     console.log('Suchergebnisse für "Playwright": ${heading}');           
 
