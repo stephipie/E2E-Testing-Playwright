@@ -29,4 +29,22 @@ test.describe("Wikipedia Playwright article test", () => {
 
     expect(langAttribute).toBe("en");
   });
+
+  test("validation of formular input", async ({ page }) => {
+    await page.goto("https://www.saucedemo.com/");
+    // try to login without entering any data
+    await page.getByRole("button", { name: "Login" }).click(); 
+    // check if error message is displayed
+    const errorMessage = await page.locator(".error");
+    await expect(errorMessage).toBeTruthy();
+    // test to see what happens if we enter a wrong password
+    await page.fill("input[name=user-name]", "standard_user");
+    await page.fill("input[name=password]", "wrong_password");
+    await page.getByRole("button", { name: "Login" }).click(); 
+    await expect(errorMessage).toBeTruthy();
+
+    // Test to save a screenshot if Test fails
+    await page.screenshot({ path: "screenshot.png" });
+  } );
 });
+
