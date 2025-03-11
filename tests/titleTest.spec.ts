@@ -70,10 +70,16 @@ test.describe("Looking for Title", () => {
 
     // Überprüfe, ob die Suchergebnisse geladen wurden
     const heading = await page.textContent('#firstHeading');
-    console.log('Suchergebnisse für "Playwright": ${heading}');
-  
-              
+    console.log('Suchergebnisse für "Playwright": ${heading}');           
 
-  });                   
+  });   
   
+  // Test to save a screenshot of the page
+  test("screenshot of the page", async ({ page }) => {
+    await page.goto("https://www.wikipedia.org/");
+
+    // Save a screenshot of the page
+    await page.screenshot({ path: "screenshot.png" });
+  });
+
 });
