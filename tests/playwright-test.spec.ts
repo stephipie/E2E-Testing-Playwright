@@ -27,8 +27,10 @@ test.describe("Looking for Title", () => {
     await page.goto("https://www.wikipedia.org/");
 
     // Expect navigationbar to be visible
-    const navigationSidebar = page.getByText("Englisch");
-    await expect(navigationSidebar).toBeVisible();
+    const navigationbar = await page.locator(
+      'a[title="English — Wikipedia — The Free Encyclopedia"]'
+    );
+    await expect(navigationbar).toBeVisible();
   });
 
   // Test if a user is able to login to ( https://www.saucedemo.com/ )
@@ -61,19 +63,18 @@ test.describe("Looking for Title", () => {
     // Click search button
     await page.getByRole("button", { name: "Search" }).click();
 
-   // Wait for search results to load and verify they are visible
-   const searchResults = page.locator('.mw-search-results');
-   await expect(searchResults).toBeTruthy();
+    // Wait for search results to load and verify they are visible
+    const searchResults = page.locator(".mw-search-results");
+    await expect(searchResults).toBeTruthy();
 
     // Wait results to be loaded
-    await page.waitForSelector('#firstHeading');
+    await page.waitForSelector("#firstHeading");
 
     // Check if the search results are loaded
-    const heading = await page.textContent('#firstHeading');
-    console.log('Suchergebnisse für "Playwright": ${heading}');           
+    const heading = await page.textContent("#firstHeading");
+    console.log('Suchergebnisse für "Playwright": ${heading}');
+  });
 
-  });   
-  
   // Test to save a screenshot of the page
   test("screenshot of the page", async ({ page }) => {
     await page.goto("https://www.wikipedia.org/");
@@ -81,5 +82,4 @@ test.describe("Looking for Title", () => {
     // Save a screenshot of the page
     await page.screenshot({ path: "screenshot.png" });
   });
-
 });
