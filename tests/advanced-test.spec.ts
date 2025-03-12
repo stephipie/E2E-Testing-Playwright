@@ -5,7 +5,8 @@ test.describe("Wikipedia Playwright article test", () => {
     await page.goto("https://www.wikipedia.org/");
 
     // Wähle die Sprache "English"
-    await page.click("text=English");
+    const englishLink = await page.locator('a[title="English — Wikipedia — The Free Encyclopedia"]');
+    await englishLink.click();
 
     // Suche nach dem Artikel "Playwright"
     await page.fill("input[name=search]", "Playwright");
